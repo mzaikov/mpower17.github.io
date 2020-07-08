@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Массив промисов</title><meta charset="utf-8">
+ </head>
+ <body>
+    <button>Поехали</button>
+    <ol id="values">
+        <li>10</li>
+        <li>20</li>
+        <li>30</li>
+    </ol>
+    <ol id="urls">
+        <li>https://kodaktor.ru/api/m/</li>
+        <li>https://kodaktor.ru/api/MS2/</li>
+        <li>https://kodaktor.ru/api/MS3/</li>
+    </ol>
+    <script>{
+        let result = '';
+        const values = Array.from(document.querySelector('#values').children).map(x => x.textContent);
+        const URLs = Array.from(document.querySelector('#urls').children).map(x => x.textContent);
+        document
+            .querySelector('button')
+            .addEventListener('click', async ({ target: t }) => {
+                for (let i = 0; i < values.length; i++) {
+                    const url = `${URLs[i]}${values[i]}${result ? `/${result}` : ''}`;
+                    const response = await fetch(url).then(r => r.text());
+                    const div = document.createElement('div');
+                    div.innerHTML = response;
+                    result = div.querySelector('h2').textContent;
+                }
+                t.textContent = `Результат: ${result}`;
+            }
+        ); 
+    }</script>
+ </body>
+</html>

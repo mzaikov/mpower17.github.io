@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Vue Browser Starter Component</title>
+   <script src="//vuejs.org/js/vue.js"></script>
+ </head>
+ <body>
+    <h1>Vue Component</h1>
+    <div id="cont">
+      <input v-model="value" />
+      <input v-model="value" />
+    </div>
+    <script type="module">
+      new Vue({
+      	el: '#cont',
+        data: { value: '' }
+      });
+    </script>
+ </body>
+</html>

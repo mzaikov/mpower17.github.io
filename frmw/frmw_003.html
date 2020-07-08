@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Список дел</title>
+   <script src="//vuejs.org/js/vue.js"></script>
+ </head>
+ <body>
+    <h1>Vue Component</h1>
+    <div id="cont">
+      <list/>
+    </div>
+    <script type="module">
+      Vue.component('list-item', {
+      	props: ['text', 'checked'],
+        template: '<li>{{text}} <input type="checkbox" :checked="checked" v-on:change.prevent="check" /></li>',
+        methods: {
+        	check (e) { this.$emit('check', e.target.checked); }
+        }
+      });
+      
+      Vue.component('list', {
+      	data() {
+        	return { items: [], newName: 'пустое' };
+        },
+        template: '<div><ol><list-item @check="check(key, $event)" v-for="(item, key) in items" :key="key" :text="item.text" :checked="item.checked"/></ol><input v-model="newName"/><button @click="add" :style="{  backgroundColor: \'green\', color: \'white\' } ">Добавить</button><button @click="remove" :style="{ backgroundColor: \'red\', color: \'white\' }">Удалить</button></div>',
+        methods: {
+        	check (idx, checked) {
+            	const item = this.items[idx];
+              this.items.splice(idx, 1, { text: item.text, checked });
+            },
+            add () {
+            	this.items.push({ text: this.newName, checked: false });
+              this.newName = 'пустое';
+            },
+            remove () {
+            	this.items = this.items.filter(x => !x.checked);
+            }
+        },
+        async created() {
+        	const response = await fetch('https://kodaktor.ru/j/tasklist')
+            	.then(x => x.json());
+            this.items = response.list.map(x => ({ text: x, checked: false}));
+		}
+      });
+
+      new Vue({
+      	el: '#cont',
+        data: { value: '' }
+      });
+    </script>
+ </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head><script src="/j/out"></script><script src="/socket.io/socket.io.js"></script>
+   <title>FUNC-005 – Задание по каррированию</title><meta charset="utf-8"><meta name="author" content="Ilya Gosudarev"><link rel="stylesheet" href="/css/board2"><link rel="stylesheet" href="/css/highcss_atom">
+ </head>
+ <body>
+   <script src="/j/dblttl"></script> <script src="/high.js"></script> <script>hljs.initHighlightingOnLoad();</script>
+    <pre class="task">
+  (ранее curry_task)
+
+  Это примеры каррирования — вместо одной функции от двух аргументов перед нами функция от одного аргумента,
+  которая возвращает другую функцию от одного аргумента (аргумент возвращающей функции доступен для возвращаемой и сохраняется «вокруг неё»): 
+    </pre>  
+    <pre><code>{
+        const curryPow = x => y => x ** y;
+        const partiPow = x => y => y ** x;
+        Out.log(curryPow(2)(10)); // 1024
+        
+        const qv = partiPow(2);
+        const cb = partiPow(3);
+
+        Out.log(qv(5)); // 25
+        Out.log(cb(5)); // 125
+
+    }</code></pre>
+    <pre class="task">
+   Выше определена функция curryPow. В ней подразумевается, что первый аргумент — это основание степени, а второй — показатель. 
+   Так она возводит 2 в степень 10 и получает 1024.
+   Напишите аналогичное определение для функции partiPow, которое отвечает такому условию:
+     когда мы вызываем её от одного аргумента, она возвращает функцию с зафиксированным показателем степени.
+     Например, qv — это функция, которая возводит свой аргумент в квадрат — поэтому qv(5) даёт 25.
+    </pre>  
+
+   <script>{
+  const codes = document.querySelectorAll('pre code');
+  Array.from(codes, e=> {
+      e.parentNode.appendChild( document.createElement('script') ).appendChild(document.createTextNode(e.textContent));
+  })
+
+
+}</script>
+ </body>
+</html>
+
+
+<!-- <script>let myURL='https://kodaktor.ru/func_005'</script><script src="/j/redir"></script> -->

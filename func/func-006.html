@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+ <head><script src="/j/out"></script><link rel="stylesheet" href="/css/board2">
+    <script src="//kodaktor.ru/babel6.26.0.js"></script>
+  <title>FUNC-006</title><meta charset="utf-8"><meta name="author" content="Ilya Gosudarev">
+ </head>
+ <body> <script src="/j/dblttl"></script><script>console.clear();</script> 
+  <script type="text/babel" data-plugins="transform-function-bind">{    
+(function(){
+
+    const square = function (){ return this * this; };
+    Out.log(this::square()); 
+    
+    // используйте слово this и оператор двойного двоеточия
+    // чтобы вызов square вернул 25
+    // для этого добавьте нужный атрибут в этот элемент script
+    
+}.bind(5))();
+   }</script>  
+ </body>
+</html>
+

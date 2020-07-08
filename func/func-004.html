@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+ <head><script src="/j/out"></script><title>Композиция (func_task)</title><meta charset="utf-8"></head>
+ <body><script src="/j/dblttl"></script>
+   <pre>При вызове qv(sc((5))) мы получаем 36, т.к. это (5+1)*(5+1) = 6*6, а в обратном порядке 5*5+1 получаем 26      
+Импортируйте из модуля по адресу https://kodaktor.ru/j/goss_compose функцию compose(f1,f2,...)
+Эта функция высшего порядка возвращает функцию, которая представляет собой композицию функций f1, f2,..., которые она получила в качестве аргументов.
+Допишите в строках 16 и 17 вызовы этой функции от функций qv и sc так, чтобы получить значения 36 и 26 от аргумента 5.
+   </pre>
+   <script>{    
+  	 let {compose} = await import('https://kodaktor.ru/j/goss_compose');
+     const qv = x => x * x;
+     const sc = x => x + 1;
+     Out.log(qv(sc((5))))         /* 36 */
+        .log(sc(qv((5))))         /* 26 */
+     	.log(compose(qv,sc)(5))
+        .log(compose(sc,qv)(5));
+ }</script></body>
+</html>
+
+// вроде так, хз, в кодакторе import ошибку в консоли даёт

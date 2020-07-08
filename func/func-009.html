@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head><script src="/j/out"></script><script src="/socket.io/socket.io.js"></script>
+   <title>FUNC-008 – Задание по замыканию</title><meta charset="utf-8"><meta name="author" content="Ilya Gosudarev"><link rel="stylesheet" href="/css/board2"><link rel="stylesheet" href="/css/highcss_atom">
+ </head>
+ <body>
+   <script src="/j/dblttl"></script> <script src="/high.js"></script> <script>hljs.initHighlightingOnLoad();</script>
+    <pre class="task"> Дана функция:</pre>  
+    <pre><code>{
+        const cc = (x = 0) => () => ++x;
+        const a = cc();
+        Out.log(a());
+        Out.log(a());
+        Out.log(a());
+}</code></pre>
+    <pre class="task">
+   Нужно вызвать эту функцию и с помощью ещё трёх вызовов получить  подряд идущие значения привязки x: 1, 2, 3</pre>  
+
+   <script>{
+  const codes = document.querySelectorAll('pre code');
+  Array.from(codes, e=> {
+      e.parentNode.appendChild( document.createElement('script') ).appendChild(document.createTextNode(e.textContent));
+  })
+
+
+}</script>
+ </body>
+</html>
+
+
+<!-- <script>let myURL='https://kodaktor.ru/func_005'</script><script src="/j/redir"></script> -->

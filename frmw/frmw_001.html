@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>React Bind</title> 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.0.0/umd/react.production.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+ </head>
+ <body>
+    <div class="cont"></div>
+    <script type="text/babel">
+        const [{ Component: C }, { render: r }] = [React, ReactDOM];
+
+        class InputsComponent extends C {
+            constructor() {
+                super();
+                this.state = { value: '' };
+            }
+            onChange(e) {
+                const value = e.target.value;
+                this.setState(() => ({ value }));
+            }
+            render() {
+                return (<div>
+                    <input value={this.state.value} onChange={this.onChange.bind(this)} />
+                    <input value={this.state.value} onChange={this.onChange.bind(this)} />
+                </div>);
+            }
+        }
+
+        r(
+            <InputsComponent  />,
+            document.querySelector('.cont')
+        );
+    </script>
+    <hr>
+ </body>
+</html>

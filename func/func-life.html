@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+ <head><script src="/j/out"></script><script src="/socket.io/socket.io.js"></script>
+   <title>Задание по функциям</title><meta charset="utf-8"><meta name="author" content="Ilya Gosudarev"><link rel="stylesheet" href="/css/board2"><link rel="stylesheet" href="/css/highcss_atom">
+ </head>
+ <body>
+   <script src="/j/dblttl"></script> <script src="/high.js"></script>  
+    <pre class="task">
+ 
+  Итак, лямбда – это выражение-тело плюс указание на то, куда что-либо можно подставлять в это выражение. 
+() => Out.log('Меня вызвали!') 
+  А вот это ниже пример немедленно вызываемого функционального выражения (IIFE — Immediately Invoked Function Expression): 
+    </pre>  
+    <pre><code>
+	(() => e => e())()(() => console.log('Меня вызвали'))
+    </code></pre>
+  <pre class="task">
+  Здесь функция (безымянная, лямбда) сначала определяется, а потом вызывается – круглые скобки справа её вызывают.
+  </pre>    
+  <pre class="task">
+  Обдумайте и спроектируйте способ вызова этой функции, при котором выражение вызова (пара круглых скобок) находилась бы
+  не справа от функции, а слева.
+  </pre>  
+
+   <script>{
+  const { initHighlightingOnLoad: ihl } = hljs;
+  const { log: lg } = console;
+  const codes = document.querySelectorAll('pre code');
+  Array.from(codes, e=> {
+      e.parentNode.appendChild( document.createElement('script') ).appendChild(document.createTextNode(e.textContent));
+  });
+
+   ihl();
+  //  
+
+  setTimeout(() => {
+	let selection = window.getSelection(), range = document.createRange(), el = document.querySelector('.hljs'); selection.removeAllRanges(); range.setStart (el, 1); range.setEnd (el, 4); selection.modify('extend', 'right', 'character'); selection.addRange(range);  selection.modify('extend', 'right', 'character');	
+  }, 10);
+    
+
+}</script>
+ </body>
+</html>

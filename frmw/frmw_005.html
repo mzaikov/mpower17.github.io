@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>FRMW-005</title>
+   <script src="https://vuejs.org/js/vue.js"></script>
+ </head>
+ <body>
+    <div id="cont">
+      <div><color :value="red" @update="updateRed" /></div>
+      <div><color :value="green" @update="updateGreen" /></div>
+      <div><color :value="blue" @update="updateBlue" /></div>
+    </div>
+    <script type="module">
+      Vue.component('color', {
+        props: ['value'],
+        template: '<div><input type="number" min="0" max="255" :value="value" @change.prevent="update($event.target.value)" /><input type="range" min="0" max="255" step="1" :value="value" @change.prevent="update($event.target.value)" /></div>',
+        methods: {
+          update (v) { this.$emit('update', v); }
+        }
+      });
+
+      new Vue({
+      	el: '#cont',
+        data: { 
+          red: 255,
+          green: 255,
+          blue: 255
+        },
+        methods: {
+          updateRed (value) { this.red = value; this.updateColor(); },
+          updateGreen (value) { this.green = value; this.updateColor(); },
+          updateBlue (value) { this.blue = value; this.updateColor(); },
+          updateColor () { document.querySelector('body').style.backgroundColor = `rgb(${this.red}, ${this.green}, ${this.blue})`; }
+        }
+      });
+    </script>
+ </body>
+</html>

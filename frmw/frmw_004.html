@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>FRMW-004</title>
+   <script src="https://vuejs.org/js/vue.js"></script>
+ </head>
+ <body>
+    <div id="cont">
+      <button @click="exps = Number(exps) + 1">&#x2B06;</button>
+      <input v-model="exps" />
+      <degs :arr="Array.from({ length: exps }, (v, i) => 10 + i)" />
+    </div>
+    <script type="module">
+      Vue.component('power', {
+        props: ['base', 'exp'],
+        template: '<h1><span>{{base}}</span><sup>{{exp}}</sup> = {{base ** exp}}</h1>'
+      });
+
+      Vue.component('degs', {
+        props: ['arr'],
+        template: '<ul><li v-for="(v, i) in arr"><power :base="2" :exp="v" key="i" /></li></ul>'
+      })
+
+      new Vue({
+      	el: '#cont',
+        data: { 
+          exps: 5
+        }
+      });
+    </script>
+ </body>
+</html>

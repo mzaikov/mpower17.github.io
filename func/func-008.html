@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title>FUNC-008</title><meta charset="utf-8"><meta name="author" content="Ilya Gosudarev"><link rel="stylesheet" href="/css/board2"><link rel="stylesheet" href="/css/highcss_atom">
+ </head>
+ <body>
+    <pre class="task">
+
+Ранее - https://kodaktor.ru/zzzzzzz
+
+Пожалуйста, сделайте следующее:
+
+1. Отправьте POST-запрос на адрес 3336.kodaktor.ru/funcpsst
+2. Вы получите массив текстов тел функций
+3. Получите по нему с помощью метода map массив функций, каждая из которых способна получить сколько угодно аргументов
+4. Подсчитайте значение первой функции от значений этих текстовых полей:
+
+<input value="3" class="f0"><input value="4" class="f0"><input value="5" class="f0"><input value="10" class="f0">
+
+5. Подсчитайте значение второй функции от значений этих текстовых полей: 
+
+<input value="1" class="f1"><input value="2" class="f1"><input value="3" class="f1"><input value="4" class="f1"><input value="5" class="f1"><input value="6" class="f1"><input value="7" class="f1"><input value="8" class="f1"><input value="9" class="f1"><input value="10" class="f1">
+
+    </pre>  
+     
+<pre class="task">
+  
+ПОЯСНЕНИЕ
+
+Деструктурируйте полученный от сервера ответ в переменную g (массив тел)
+С помощью метода map сопоставьте элементам массива g функции
+(для этого используйте вызов конструктора Function, первым аргументом которого будет оператор rest/spread от x, а вторым каждое тело)
+
+С помощью метода Array.from превратите результат работы querySelectorAll
+в массив
+С помощью метода map теперь сопоставьте элементам этого массива (т.е. инпутам)
+их значения, преобразованные в числа с помощью + или Number
+
+С помощью метода apply примените полученные массивы к вашим функциям
+(f[0].apply(...))
+
+* Реализуйте интерфейс вида
+
+<img src="interface800x200.gif" alt="">
+
+для добавления произвольного количества аргументов
+
+</pre>       
+
+<script>
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open("POST", 'https://3336.kodaktor.ru/funcpsst', true);
+    
+    xhr.send();
+    
+    xhr.onload = function() {
+    if (xhr.status === 200) {
+    const { g } = JSON.parse(xhr.response);
+    const f = g.map(strFunc => new Function("x", strFunc));
+    const x0 = Array.from(document.querySelectorAll(".f0")).map(input => +input.value);
+    const x1 = Array.from(document.querySelectorAll(".f1")).map(input => +input.value);
+    
+    console.log(f[0].apply(null, [x0]));
+    console.log(f[1].apply(null, [x1]));
+    }
+    };
+</script>
+    
+ </body>
+</html>
